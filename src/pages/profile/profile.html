@@ -1,0 +1,31 @@
+<ion-header>
+
+  <ion-navbar color="dark">
+    <ion-title>Profile</ion-title>
+    <ion-buttons end *ngIf="user">
+      <button ion-button (click)="searchAgain()">
+        <ion-icon name="checkmark" ></ion-icon>
+      </button>
+    </ion-buttons>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+  <div *ngIf="!user; else searchResults">
+    <ion-item>
+      <ion-label floating>Username</ion-label>
+      <ion-input [(ngModel)]="username"></ion-input>
+    </ion-item>
+
+    <ion-fab bottom right>
+      <button ion-fab (click)="getUserInformation()">
+      <ion-icon name="search"></ion-icon>
+    </button>
+    </ion-fab>
+  </div>
+
+  <ng-template #searchResults>
+    <!--<search-results [user]="user"></search-results>-->
+    <repositories *ngFor="let repo of repositories" [repository]="repo"></repositories>
+  </ng-template>
+</ion-content>
